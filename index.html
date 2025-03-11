@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Ennhiri - CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fdfdfd; /* Soft background color */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #007bff, #0056b3); /* Updated gradient */
+            color: #fff;
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-top: 40px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        header p {
+            font-size: 1.3em;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+        }
+
+        /* Navigation Styles */
+        nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: #333;
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: color 0.3s ease, transform 0.3s ease;
+            padding: 10px 20px;
+        }
+
+        nav a:hover, nav a.active {
+            color: #00eeff; /* Highlight color on hover */
+            transform: scale(1.1);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 20px;
+            background: #fff;
+            margin: 30px auto;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Enhanced shadow */
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            color: #007bff; /* Updated color */
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #007bff; /* Updated color */
+            transition: width 0.3s ease;
+        }
+
+        section:hover h2::after {
+            width: 100px;
+        }
+
+        /* Article Styles */
+        article {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid #007bff; /* Updated color */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        article h3 {
+            font-size: 1.6em;
+            color: #333;
+        }
+
+        article p {
+            margin: 8px 0;
+        }
+
+        /* Skills Section */
+        #skills ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #skills li {
+            margin-bottom: 10px;
+        }
+
+        .skill-wrapper {
+            display: inline-block;
+            position: relative;
+            margin-right: 5px;
+        }
+
+        .skill-wrapper:not(:last-child)::after {
+            content: ', ';
+        }
+
+        .skill-item {
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .popover {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 10;
+            width: 250px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            text-align: center;
+        }
+
+        .popover i {
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        .popover p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .skill-wrapper:hover .popover {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Languages and References */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        ul li strong {
+            color: #007bff; /* Updated color */
+        }
+
+        /* Links */
+        a {
+            color: #007bff; /* Updated color */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3; /* Darker shade on hover */
+            text-decoration: underline;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #007bff; /* Updated color */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        #back-to-top:hover {
+            background: #0056b3; /* Darker shade on hover */
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5em; }
+            header p { font-size: 1.2em; }
+            nav li { margin: 10px; }
+            section { margin: 20px 10px; padding: 40px 15px; }
+            article { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#contact"> Contact </a></li>
+            <li><a href="#education"> Education </a></li>
+            <li><a href="#skills"> Skills </a></li>
+            <li><a href="#projects"> Projects </a></li>
+            <li><a href="#experience"> Experience </a></li>
+            <li><a href="#languages"> Languages </a></li>
+            <li><a href="#references"> References </a></li>
+        </ul>
+    </nav>
+
+    <header>
+
+        <h1>Mohamed Ennhiri</h1>
+        <p class="typing">Master's Student in Energy for Solar Buildings and Cities</p>
+    </header>
+
+    <section id="contact">
+        <h2>Contact Information</h2>
+        <p><strong>Phone:</strong> +33 7 58 13 61 62</p>
+        <p><strong>Email:</strong> <a href="mailto:mennhiri@gmail.com">mennhiri@gmail.com</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mohamed-ennhiri/" target="_blank">Mohamed Ennhiri</a></p>
+        <p><strong>Location:</strong> Chambéry, France</p>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <article>
+            <h3>Master's in Energy for Solar Buildings and Cities</h3>
+            <p><b>University of Savoie Mont Blanc / Polytech Annecy - Chambéry</b></p>
+            <p>September 2023 - July 2025</p>
+        </article>
+        <article>
+            <h3>Professional Bachelor's in Renewable and Alternative Energy Systems</h3>
+            <p><b>University of Le Havre Normandy</b></p>
+            <p>September 2022 - July 2023</p>
+        </article>
+        <article>
+            <h3>Professional Bachelor's in Technical Coordinator for the Optimization of Renewable Electrical Energies</h3>
+            <p><b>Conservatoire national des arts et métiers (CNAM)</b></p>
+            <p>September 2020 - July 2021</p>
+        </article>
+        <article>
+            <h3>Advanced Technician Certificate in Wind Systems</h3>
+            <p><b>Institute for Training in Renewable Energy Professions and Energy Efficiency (IFMEREE)</b></p>
+            <p>September 2018 - July 2020</p>
+        </article>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li><strong>Solar Tools:</strong>
+                <div class="skill-wrapper">
+                    <span class="skill-item">QGIS</span>
+                    <div class="popover">
+                        <i class="fas fa-map" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Geographic Information System software</p>
+                        <p><strong>Experience:</strong> Intermediate</p>
+                    </div>
+                </div>
+                <div class="skill-wrapper">
+                    <span class="skill-item">PVsyst</span>
+                    <div class="popover">
+                        <i class="fas fa-solar-panel" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Solar PV system design software</p>
+                        <p><strong>Experience:</strong> Advanced</p>
+                    </div>
+                </div>
+                <div class="skill-wrapper">
+                    <span class="skill-item">SAM</span>
+                    <div class="popover">
+                        <i class="fas fa-tools" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> System Advisor Model for renewable energy</p>
+                        <p><strong>Experience:</strong> Intermediate</p>
+                    </div>
+                </div>
+                <div class="skill-wrapper">
+                    <span class="skill-item">Revit</span>
+                    <div class="popover">
+                        <i class="fas fa-building" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Building Information Modeling software</p>
+                        <p><strong>Experience:</strong> Intermediate</p>
+                    </div>
+                </div>
+                <div class="skill-wrapper">
+                    <span class="skill-item">PVgis</span>
+                    <div class="popover">
+                        <i class="fas fa-sun" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Photovoltaic Geographical Information System</p>
+                        <p><strong>Experience:</strong> Advanced</p>
+                    </div>
+                </div>
+            </li>
+            <li><strong>Programming:</strong>
+                <div class="skill-wrapper">
+                    <span class="skill-item">Python</span>
+                    <div class="popover">
+                        <i class="fab fa-python" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Programming language</p>
+                        <p><strong>Experience:</strong> Advanced</p>
+                    </div>
+                </div>
+                <div class="skill-wrapper">
+                    <span class="skill-item">Data Analysis</span>
+                    <div class="popover">
+                        <i class="fas fa-chart-bar" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Analyzing and interpreting data</p>
+                        <p><strong>Experience:</strong> Advanced</p>
+                    </div>
+                </div>
+                <div class="skill-wrapper">
+                    <span class="skill-item">Machine Learning</span>
+                    <div class="popover">
+                        <i class="fas fa-brain" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Field of AI</p>
+                        <p><strong>Experience:</strong> Intermediate</p>
+                    </div>
+                </div>
+                <div class="skill-wrapper">
+                    <span class="skill-item">Tensorflow</span>
+                    <div class="popover">
+                        <i class="fas fa-network-wired" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Deep Learning Framework</p>
+                        <p><strong>Experience:</strong> Beginner</p>
+                    </div>
+                </div>
+                <div class="skill-wrapper">
+                    <span class="skill-item">Pytorch</span>
+                    <div class="popover">
+                        <i class="fas fa-fire" style="font-size: 24px; color: #007bff;"></i>
+                        <p><strong>Explanation:</strong> Deep Learning Framework</p>
+                        <p><strong>Experience:</strong> Intermediate</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <article>
+            <h3>Rooftop Photovoltaic System Detection in Heterogeneous Urban and Rural Areas: Application to French Territories.</h3>
+            <p><b>October 2024 - January 2025 | Polytech Annecy-Chambéry / LOCIE</b></p>
+            <p>In this study, we provide an approach for automatically identifying rooftop photovoltaic (PV) installations in various 
+                rural and urban environments throughout the French territory. A curated dataset is first created by cleaning and 
+                classifying aerial rooftop photos according to whether PV panels are present or not. Several pre-trained convolutional 
+                neural network (CNN) models, such as ResNet-18, ResNet-50, ResNeXt-50, EfficientNet, and DenseNet, are trained 
+                using this revised dataset. We create classifiers that can reliably differentiate rooftops with and without PV installations 
+                by optimizing these models. To assess classification performance, the trained models are then used on a sizable dataset. 
+                The models' accuracy and resilience in managing rooftop characteristics and environmental heterogeneity are 
+                demonstrated by the experimental results. With an aim to provide an adaptable approach for identifying distributed PV 
+                systems.</p>
+        </article>
+        <article>
+            <h3>Efficient Electrical Energy Storage Management: A Case Study of the BEEAU'LAC Project</h3>
+            <p><b>February 2024 - May 2024 | Polytech Annecy-Chambéry / LOCIE</b></p>
+            <p> In this study, we continue the previous work done in the BEEAU LAC project. 
+                First, we aim to verify that the OMEGAlpes tool used in the project is actively optimizing the BESS by simulating various 
+                energy profiles over a year and ensuring that the model allows the battery to perform in good conditions all year. Secondly, 
+                we develop a tool that works on optimizing the BESS by optimizing the charging power and creating BMS-like decisions 
+                to time the charge/discharge of the BESS. Lastly, we develop python code that merges with our tool to estimate cycle life . </p>
+        </article>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <article>
+            <h3>End of Study Internship</h3>
+            <p><b>LOCIE | February 2025 - July 2025 | Chambéry, France</b></p>
+            <p>Determining the most suitable rooftops for the installation of photovoltaic (PV) systems requires a highly interdisciplinary approach, considering energy, economic, social, and technical criteria. Knowing the precise location of already installed residential PV systems can help urban planners and other stakeholders define deployment scenarios and prioritize rooftops, starting by excluding those that are already equipped. From the perspective of distribution system operators (DSOs), understanding where PV systems are already installed is essential for adapting the grid infrastructure when adding new PV systems.</p>
+        </article>
+        <article>
+            <h3>Technical Assistance Technician</h3>
+            <p><b>BEAT2E | August 2021 - February 2022 | Keritra, Morocco</b></p>
+            <p>Engineering consultancy and technical assistance in water and environmental engineering.</p>
+            <p>Coordinated and provided technical support for water supply, electrification, and PV installation projects in the Oriental Region's border area development program.</p>
+        </article>
+        <article>
+            <h3>Professional Experience Internship</h3>
+            <p><b>INGTELma | February 2021 - July 2021 | Tangier, Morocco</b></p>
+            <p>Engaged in diverse tasks including medium and low voltage network construction, maintenance of centralized technical management systems, remote monitoring, and technical room reorganization.</p>
+            <p>Analyzed client requirements, interpreted plans and technical specifications, determined electrical material and equipment needs, and prepared cost estimates.</p>
+        </article>
+        <article>
+            <h3>End of Study Internship</h3>
+            <p><b>IFMEREE | April 2020 - July 2020 | Oujda, Morocco</b></p>
+            <p>Managed a public training service focused on renewable energy professions.</p>
+            <p>Designed and delivered courses and practical sessions on renewable energies such as solar, wind, hydraulic, biomass, and geothermal, aligning with the curriculum.</p>
+        </article>
+    </section>
+
+    <section id="languages">
+        <h2>Languages</h2>
+        <ul>
+            <li><b>French</b>: C1</li>
+            <li><b>English</b>: C1</li>
+            <li><b>Arabic</b>: Native</li>
+        </ul>
+    </section>
+
+    <section id="references">
+        <h2>References</h2>
+        <p><a href="https://www.univ-smb.fr/locie/monika-woloszyn-enseignante-chercheuse-membre-du-locie/" target="_blank"> Monika Woloszya</a>: Head of the Solar Academy.</p>
+        <p><a href="https://www.univ-smb.fr/locie/thebault-martin-membre-du-locie/" target="_blank"> Martin Thebault</a>: CNRS - LOCIE researcher (My Internship Supervisor). </p>
+        <p><a href="https://www.univ-smb.fr/locie/jaume-fito-membre-du-locie/" target="_blank"> Jaume Fitó-De-La-Cruz</a>: Associate Professor at Université Savoie Mont Blanc.</p>
+    </section>
+
+    <button id="back-to-top">↑</button>
+
+    <script>
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Section Fade-In Animation
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Navigation Highlighting
+        const navLinks = document.querySelectorAll('nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
